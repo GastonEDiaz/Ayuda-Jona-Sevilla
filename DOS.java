@@ -1,6 +1,3 @@
-package principal;
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -13,9 +10,9 @@ public class DOS {
         
         Scanner lector = new Scanner(System.in);
         System.out.println("Cuantos Codigos-Nombres-Promedios desea Ingresar?:");                
-        lector.nextInt();
-        String capturadorLector;
-        capturadorLector = (lector).toString();
+        String capturadorLector = String.valueOf( lector.nextInt());
+        
+        
         int tamVectores = Integer.parseInt(capturadorLector);
         //Declaramos todos los Vectores
         int[] vecCodigo = new int[tamVectores];
@@ -50,6 +47,7 @@ public class DOS {
             System.out.println(contador+"° Cod: "+vecCodigo[i]);
             System.out.println(contador+"° Nombre: "+vecNombre[i]);
             System.out.println(contador+"° Promedio: "+vecPromedio[i]);
+            contador++;
         }
         
         //Ordenamos de Mayor a Menor los Datos por medio del Metodo Burbuja
@@ -90,24 +88,41 @@ public class DOS {
         contador = 1;
         for (int i = 0; i < tamVectores; i++) {
             System.out.println(contador+"° Codigo: "+vecCodigo[i]);
+            contador++;
         }
         //Vector de Nombres Ordenado
         contador = 1;
         for (int i = 0; i < tamVectores; i++) {
             System.out.println(contador+"° Nombre: "+vecNombre[i]);
+            contador++;
         }
         //Vector de Promedio Ordenado
         contador = 1;
         for (int i = 0; i < tamVectores; i++) {
             System.out.println(contador+"° Promedio: "+vecPromedio[i]);
+            contador++;
         }
         
         //Busqueda Binaria para mostrar un dato por Codigo
         System.out.println("Ingrese Codigo a Buscar: ");
-        capturadorLector=(lector.next()).toString();
+        capturadorLector=String.valueOf(lector.nextInt());
         codigoCapturado = Integer.parseInt(capturadorLector);        
-        int posicion = Arrays.binarySearch(vecCodigo, codigoCapturado);
+        int inicio=0, fin = vecCodigo.length-1, centro,posicion=0;
         
+        while (inicio<=fin) {
+            centro = (inicio+fin)/2;
+            if (vecCodigo[centro]== codigoCapturado) {
+                
+                posicion = centro;
+            }
+            else if (vecCodigo[centro]< codigoCapturado) {
+                inicio=centro+1;
+            }
+            else{
+                fin = centro-1;
+            }
+        }
+                
         System.out.println("Codigo: "+ vecCodigo[posicion]);
         System.out.println("Nombre: "+ vecNombre[posicion]);
         System.out.println("Promedio: "+vecPromedio[posicion]);
